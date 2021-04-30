@@ -1,0 +1,3 @@
+C:/Users/User/Desktop/Netrom Code Golf/SoundCheck/cmake-build-debug/CMakeFiles/SoundCheck.dir
+C:/Users/User/Desktop/Netrom Code Golf/SoundCheck/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/User/Desktop/Netrom Code Golf/SoundCheck/cmake-build-debug/CMakeFiles/rebuild_cache.dir
