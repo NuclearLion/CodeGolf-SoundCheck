@@ -26,46 +26,58 @@
 
 using namespace std;
 
-struct s
-{
-	unsigned char i;
-	unsigned char l;
-	unsigned char c;
+struct s {
+    unsigned char i;
+    unsigned char l;
+    unsigned char c;
 };
 
-void f(unsigned char n, unsigned char m, unsigned char ns, s* ss)
-{
+void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
+    string heatmap[(int)n + 1][(int)m + 1];
+    for (int i = 1; i <= n; ++i)
+        for (int j = 1; j <= m; ++j)
+            heatmap[i][j] = "===";
+
+    if(ns != 0)
+    {
+        //set of instructions
+    }
+
+    for (int i = 1; i <= n; ++i)
+    {
+        for (int j = 1; j <= m; ++j)
+            cout << heatmap[i][j] << " ";
+        cout << '\n';
+    }
 }
 
-int main(int argc, char** argv)
-{
-	if (argc == 1) {
-		cout << "No arguments";
-		return 0;
-	}
-	string sInputFile = argv[1];
-	ifstream in(sInputFile.c_str(), ios::in);
+int main(int argc, char **argv) {
+    if (argc == 1) {
+        cout << "No arguments";
+        return 0;
+    }
+    string sInputFile = argv[1];
+    ifstream in("test.txt");
 
-	static int n;
-	static int m;
+    static int n;
+    static int m;
 
-	static int ns;
-	static s* ss;
+    static int ns;
+    static s *ss;
 
-	in >> n >> m;
+    in >> n >> m;
 
-	in >> ns;
-	ss = new s[ns];
-	for (int index = 0; index < ns; index++)
-	{
-		int i, l, c;
-		in >> i >> l >> c;
-		ss[index].i = i;
-		ss[index].l = l;
-		ss[index].c = c;
-	}
+    in >> ns;
+    ss = new s[ns];
+    for (int index = 0; index < ns; index++) {
+        int i, l, c;
+        in >> i >> l >> c;
+        ss[index].i = i;
+        ss[index].l = l;
+        ss[index].c = c;
+    }
 
-	f(n, m, ns, ss);
-	delete[] ss;
-	return 0;
+    f(n, m, ns, ss);
+    delete[] ss;
+    return 0;
 }

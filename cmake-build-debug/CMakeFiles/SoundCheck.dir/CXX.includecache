@@ -1,0 +1,54 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/User/Desktop/Netrom Code Golf/SoundCheck/CodeGolf 2021 - Sound check - Sursa Cadru.cpp
+conio.h
+-
+stdlib.h
+-
+iostream
+-
+fstream
+-
+sstream
+-
+list
+-
+array
+-
+queue
+-
+deque
+-
+set
+-
+stack
+-
+map
+-
+unordered_set
+-
+unordered_map
+-
+vector
+-
+algorithm
+-
+bitset
+-
+functional
+-
+iterator
+-
+tuple
+-
+string
+-
+utility
+-
+
