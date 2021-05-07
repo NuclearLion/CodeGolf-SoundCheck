@@ -32,6 +32,8 @@ struct s {
     unsigned char c;
 };
 
+ofstream fout("output.out");
+
 void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
     string heatmap[(int)n + 1][(int)m + 1];
     for (int i = 1; i <= n; ++i)
@@ -40,7 +42,11 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
 
     if(ns != 0)
     {
-        //set of instructions
+        switch (ss[0].i) {
+            case 1:
+                heatmap[ss[0].l][ss[0].c] = "001";
+                break;
+        }
     }
 
     for (int i = 1; i <= n; ++i)
