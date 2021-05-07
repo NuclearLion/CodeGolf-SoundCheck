@@ -35,23 +35,48 @@ struct s {
 ofstream fout("output.out");
 
 void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
-    string heatmap[(int)n + 1][(int)m + 1];
-    for (int i = 1; i <= n; ++i)
-        for (int j = 1; j <= m; ++j)
-            heatmap[i][j] = "===";
+    static vector<vector<string>> heatmap;
+    heatmap.resize(n, vector<string>(m, "==="));
 
     if(ns != 0)
     {
-        switch (ss[0].i) {
-            case 1:
-                heatmap[ss[0].l][ss[0].c] = "001";
-                break;
-        }
+        s *it = ss;
+        //while(it != NULL)
+        //{
+            switch (it->i) {
+                case 1:
+                    heatmap[it->l - 1][it->c - 1] = "00" + to_string(it->i);
+                    break;
+                case 3:
+                    heatmap[it->l - 1][it->c - 1] = "00" + to_string(it->i);
+                    int itr = it->i;
+                    for(int i = it->l; i <= it->l + 1; ++i)
+                    {
+                        --itr;
+                        heatmap[i][it->c - 1] = "00" + to_string(itr);
+                    }
+                    itr = it->i;
+                    for(int j = it->c; j <= it->c + 1; ++j)
+                    {
+                        --itr;
+                        heatmap[it->l - 1][j] = "00" + to_string(itr);
+                    }
+                    int i = it->l;
+                    int j = it->c;
+                    itr = it->i;
+                    while (i <= it->l + 1)
+                    {
+                        --itr;
+                        heatmap[i][j] = "00" + to_string(itr);
+                        ++i, ++j;
+                    }
+            }
+        //}
     }
 
-    for (int i = 1; i <= n; ++i)
+    for (int i = 0; i < n; ++i)
     {
-        for (int j = 1; j <= m; ++j)
+        for (int j = 0; j < m; ++j)
             cout << heatmap[i][j] << " ";
         cout << '\n';
     }
