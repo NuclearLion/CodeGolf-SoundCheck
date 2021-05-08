@@ -36,7 +36,7 @@ ofstream fout("output.out");
 
 void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
     static vector<vector<string>> heatmap;
-
+    static vector<vector<int>> soundSources;
     auto displayMatrix = [&]() {//good
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < m; ++j)
@@ -53,89 +53,98 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
             space = "0" + to_string(value);
         else
             space = "00" + to_string(value);
-        if(value == 0)
+        if (value == 0)
             space = "===";
         return space;
     };//good
 
     heatmap.resize(n, vector<string>(m, "==="));
+    soundSources.resize(n, vector<int>(m, 0));
 
     if (ns != 0) {
+
         for (int it = 0; it < ns; ++it) {
-            int len = ss[it].i;
-            int intensity = ss[it].i;
-            heatmap[ss[it].l - 1][ss[it].c - 1] = stringCreator(intensity);
-            intensity--;
-            ///line -
-            for (int j = ss[it].c; j <= ss[it].c + len - 2; ++j)
-                if (j < m) {
-                    heatmap[ss[it].l - 1][j] = stringCreator(intensity);
-                    intensity--;
-                } //todo this 7 more times (total 8) maybe do func
-            intensity = ss[it].i - 1;
-            for (int j = ss[it].c - 2; j >= ss[it].c - len; --j)
-                if (j >= 0) {
-                    heatmap[ss[it].l - 1][j] = stringCreator(intensity);
-                    intensity--;
+            if ((ss[it].l - 1 >= 0 && ss[it].l - 1 < n) && (ss[it].c - 1 >= 0 && ss[it].c - 1 < m))
+                soundSources[ss[it].l - 1][ss[it].c - 1] += ss[it].i;
+        }
+
+        for (int x = 0; x < n; ++x) {
+            for (int y = 0; y < m; ++y) {
+                if (soundSources[x][y] != 0) {
+                    int len = soundSources[x][y];
+                    heatmap[x][y] = stringCreator(soundSources[x][y]);
+                    ///line -
+                    int intensity = soundSources[x][y] - 1;
+                    for (int j = y + 1; j <= y + len - 1; ++j)
+                        if (j < m) {
+                            heatmap[x][j] = stringCreator(intensity);
+                            intensity--;
+                        }
+                    intensity = soundSources[x][y] - 1;
+                    for (int j = y - 1; j >= y - len + 1; --j)
+                        if (j >= 0) {
+                            heatmap[x][j] = stringCreator(intensity);
+                            intensity--;
+                        }
+
+                    ///column |
+                    intensity = soundSources[x][y] - 1;
+                    for (int i = x + 1; i <= x + len - 1; ++i)
+                        if (i < n) {
+                            heatmap[i][y] = stringCreator(intensity);
+                            intensity--;
+                        } else
+                            break;
+                    intensity = soundSources[x][y] - 1;
+                    for (int i = x - 1; i >= x - len + 1; --i)
+                        if (i >= 0) {
+                            heatmap[i][y] = stringCreator(intensity);
+                            intensity--;
+                        }
+
+                    ///diagonal /
+                    int i = x - 1;
+                    int j = y + 1;
+                    intensity = soundSources[x][y] - 1;
+                    while (j < y + len && i >= 0 && j < m) {
+                        heatmap[i][j] = stringCreator(intensity);
+                        --intensity;
+                        --i;
+                        ++j;
+                    }
+                    i = x + 1;
+                    j = y - 1;
+                    intensity = soundSources[x][y] - 1;
+                    while (i < x + len && i < n && j >= 0) {
+                        heatmap[i][j] = stringCreator(intensity);
+                        --intensity;
+                        ++i;
+                        --j;
+                    }
+
+                    ///diagonal '\'
+                    i = x + 1;
+                    j = y + 1;
+                    intensity = soundSources[x][y] - 1;
+                    while (i < x + len && i < n && j < m) {
+                        heatmap[i][j] = stringCreator(intensity);
+                        --intensity;
+                        ++i;
+                        ++j;
+                    }
+                    i = x - 1;
+                    j = y - 1;
+                    intensity = soundSources[x][y] - 1;
+                    while (i >= x - len + 1 && i >= 0 && j >= 0) {
+                        heatmap[i][j] = stringCreator(intensity);
+                        --intensity;
+                        --i;
+                        --j;
+                    }
                 }
-
-            ///column |
-            intensity = ss[it].i - 1;
-            for (int i = ss[it].l; i <= ss[it].l + len - 2; ++i)
-                if (i < n) {
-                    heatmap[i][ss[it].c - 1] = stringCreator(intensity);
-                    intensity--;
-                }
-            intensity = ss[it].i - 1;
-            for (int i = ss[it].l - 2; i >= ss[it].l - len; --i)
-                if (i >= 0) {
-                    heatmap[i][ss[it].c - 1] = stringCreator(intensity);
-                    intensity--;
-                }
-
-            ///diagonal /
-            int i = ss[it].l - 2;
-            int j = ss[it].c;
-            intensity = ss[it].i - 1;
-            while (j < ss[it].c + len - 1 && j < m && i >= 0) {
-                heatmap[i][j] = stringCreator(intensity);
-                intensity--;
-                j++;
-                i--;
-            }
-            i = ss[it].l;
-            j = ss[it].c - 2;
-            intensity = ss[it].i - 1;
-            while (i < ss[it].l + len - 1 && j >= 0 && i < n) {
-                heatmap[i][j] = stringCreator(intensity);
-                intensity--;
-                j--;
-                i++;
-
-            }
-
-            ///diagonal '\'
-            i = ss[it].l;
-            j = ss[it].c;
-            intensity = ss[it].i - 1;
-            while (i < ss[it].l + len - 1 && j < m && i < n) {
-                heatmap[i][j] = stringCreator(intensity);
-                intensity--;
-                j++;
-                i++;
-            }
-            i = ss[it].l - 2;
-            j = ss[it].c - 2;
-            intensity = ss[it].i - 1;
-            while (i >= ss[it].l - len  && j >= 0 && i >= 0) {
-                heatmap[i][j] = stringCreator(intensity);
-                intensity--;
-                j--;
-                i--;
             }
         }
     }
-
     displayMatrix();
 }
 
