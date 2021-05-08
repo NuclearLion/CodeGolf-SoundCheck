@@ -35,15 +35,8 @@ struct s {
 ofstream fout("output.out");
 
 void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
-    static vector<vector<string>> heatmap;
+    static vector<vector<int>> heatmap;
     static vector<vector<int>> soundSources;
-    auto displayMatrix = [&]() {//good
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < m; ++j)
-                cout << heatmap[i][j] << " ";
-            cout << '\n';
-        }
-    };
 
     auto stringCreator = [&](int value) {
         string space;
@@ -58,7 +51,15 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
         return space;
     };//good
 
-    heatmap.resize(n, vector<string>(m, "==="));
+    auto displayMatrix = [&]() {//good
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < m; ++j)
+                cout << stringCreator(heatmap[i][j]) << " ";
+            cout << '\n';
+        }
+    };
+
+    heatmap.resize(n, vector<int>(m, 0));
     soundSources.resize(n, vector<int>(m, 0));
 
     if (ns != 0) {
@@ -72,18 +73,30 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
             for (int y = 0; y < m; ++y) {
                 if (soundSources[x][y] != 0) {
                     int len = soundSources[x][y];
-                    heatmap[x][y] = stringCreator(soundSources[x][y]);
+                    heatmap[x][y] = soundSources[x][y];
                     ///line -
                     int intensity = soundSources[x][y] - 1;
                     for (int j = y + 1; j <= y + len - 1; ++j)
                         if (j < m) {
-                            heatmap[x][j] = stringCreator(intensity);
+                            if (soundSources[x][j] == 0)
+                                if (heatmap[x][j] == 0)
+                                    heatmap[x][j] = intensity;
+                                else {
+                                    if (heatmap[x][j] > intensity)
+                                        heatmap[x][j] = intensity;
+                                }
                             intensity--;
                         }
                     intensity = soundSources[x][y] - 1;
                     for (int j = y - 1; j >= y - len + 1; --j)
                         if (j >= 0) {
-                            heatmap[x][j] = stringCreator(intensity);
+                            if (soundSources[x][j] == 0)
+                                if (heatmap[x][j] == 0)
+                                    heatmap[x][j] = intensity;
+                                else {
+                                    if (heatmap[x][j] > intensity)
+                                        heatmap[x][j] = intensity;
+                                }
                             intensity--;
                         }
 
@@ -91,14 +104,25 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                     intensity = soundSources[x][y] - 1;
                     for (int i = x + 1; i <= x + len - 1; ++i)
                         if (i < n) {
-                            heatmap[i][y] = stringCreator(intensity);
+                            if (soundSources[i][y] == 0)
+                                if (heatmap[i][y] == 0)
+                                    heatmap[i][y] = intensity;
+                                else {
+                                    if (heatmap[i][y] > intensity)
+                                        heatmap[i][y] = intensity;
+                                }
                             intensity--;
-                        } else
-                            break;
+                        }
                     intensity = soundSources[x][y] - 1;
                     for (int i = x - 1; i >= x - len + 1; --i)
                         if (i >= 0) {
-                            heatmap[i][y] = stringCreator(intensity);
+                            if (soundSources[i][y] == 0)
+                                if (heatmap[i][y] == 0)
+                                    heatmap[i][y] = intensity;
+                                else {
+                                    if (heatmap[i][y] > intensity)
+                                        heatmap[i][y] = intensity;
+                                }
                             intensity--;
                         }
 
@@ -107,7 +131,13 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                     int j = y + 1;
                     intensity = soundSources[x][y] - 1;
                     while (j < y + len && i >= 0 && j < m) {
-                        heatmap[i][j] = stringCreator(intensity);
+                        if (soundSources[i][j] == 0)
+                            if (heatmap[i][j] == 0)
+                                heatmap[i][j] = intensity;
+                            else {
+                                if (heatmap[i][j] > intensity)
+                                    heatmap[i][j] = intensity;
+                            }
                         --intensity;
                         --i;
                         ++j;
@@ -116,7 +146,13 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                     j = y - 1;
                     intensity = soundSources[x][y] - 1;
                     while (i < x + len && i < n && j >= 0) {
-                        heatmap[i][j] = stringCreator(intensity);
+                        if (soundSources[i][j] == 0)
+                            if (heatmap[i][j] == 0)
+                                heatmap[i][j] = intensity;
+                            else {
+                                if (heatmap[i][j] > intensity)
+                                    heatmap[i][j] = intensity;
+                            }
                         --intensity;
                         ++i;
                         --j;
@@ -127,7 +163,13 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                     j = y + 1;
                     intensity = soundSources[x][y] - 1;
                     while (i < x + len && i < n && j < m) {
-                        heatmap[i][j] = stringCreator(intensity);
+                        if (soundSources[i][j] == 0)
+                            if (heatmap[i][j] == 0)
+                                heatmap[i][j] = intensity;
+                            else {
+                                if (heatmap[i][j] > intensity)
+                                    heatmap[i][j] = intensity;
+                            }
                         --intensity;
                         ++i;
                         ++j;
@@ -136,7 +178,13 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                     j = y - 1;
                     intensity = soundSources[x][y] - 1;
                     while (i >= x - len + 1 && i >= 0 && j >= 0) {
-                        heatmap[i][j] = stringCreator(intensity);
+                        if (soundSources[i][j] == 0)
+                            if (heatmap[i][j] == 0)
+                                heatmap[i][j] = intensity;
+                            else {
+                                if (heatmap[i][j] > intensity)
+                                    heatmap[i][j] = intensity;
+                            }
                         --intensity;
                         --i;
                         --j;

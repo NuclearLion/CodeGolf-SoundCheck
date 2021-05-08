@@ -1,26 +1,14 @@
-004 004 004 === ===
-004 005 004 003 002
-004 004 004 === ===
-=== 003 === 003 ===
-=== 002 === === 002
+=== 002 002 002 003 003 003
+001 002 003 002 001 004 003
+=== 002 002 002 003 003 003
+001 === 001 002 001 002 ===
+=== === 001 === === 001 ===
+=== === === === === === ===
+=== 001 === === === 001 ===
+=== === 002 === === 002 ===
+001 === 001 003 === 003 ===
+002 002 === === 004 004 004
+003 001 001 003 004 005 004
+002 002 === === 004 004 004
 
 
-/*
-         * the ideea here is pretty simple. you are given a sound start point
-         * so the sound disperses in all the 8 possible directions inside a matrix
-         *
-         * X = = X = = X
-         * = X = X = X =
-         * = = X X X = =
-         * X X X X X X X
-         * = = X X X = =
-         * = X = X = X =
-         * X = = X = = X
-         *
-         * display only IF possible(inside the matrix)
-         * we start with coordinates somewhere and than there are
-         * several fors/a while (??) for going each direction
-         *
-         * for(pos; pos + .i)
-         *
-         */
