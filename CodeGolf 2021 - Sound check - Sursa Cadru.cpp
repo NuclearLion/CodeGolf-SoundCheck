@@ -32,7 +32,7 @@ struct s {
     unsigned char c;
 };
 
-ofstream fout("output.out");
+//ofstream fout("output.out");
 
 void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
     static vector<vector<int>> heatmap;
@@ -82,8 +82,14 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                                 if (heatmap[x][j] == 0)
                                     heatmap[x][j] = intensity;
                                 else {
-                                    if (heatmap[x][j] > intensity)
-                                        heatmap[x][j] = intensity;
+                                    if (abs(heatmap[x][j] - intensity) < 3) {
+                                        if (heatmap[x][j] > intensity)
+                                            heatmap[x][j] = intensity;
+                                    } else if (abs(heatmap[x][j] - intensity) >= 7) {
+                                        if (heatmap[x][j] < intensity)
+                                            heatmap[x][j] = intensity;
+                                    } else
+                                        heatmap[x][j] += intensity;
                                 }
                             intensity--;
                         }
@@ -94,8 +100,14 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                                 if (heatmap[x][j] == 0)
                                     heatmap[x][j] = intensity;
                                 else {
-                                    if (heatmap[x][j] > intensity)
-                                        heatmap[x][j] = intensity;
+                                    if (abs(heatmap[x][j] - intensity) < 3) {
+                                        if (heatmap[x][j] > intensity)
+                                            heatmap[x][j] = intensity;
+                                    } else if (abs(heatmap[x][j] - intensity) >= 7) {
+                                        if (heatmap[x][j] < intensity)
+                                            heatmap[x][j] = intensity;
+                                    } else
+                                        heatmap[x][j] += intensity;
                                 }
                             intensity--;
                         }
@@ -108,8 +120,14 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                                 if (heatmap[i][y] == 0)
                                     heatmap[i][y] = intensity;
                                 else {
-                                    if (heatmap[i][y] > intensity)
-                                        heatmap[i][y] = intensity;
+                                    if (abs(heatmap[i][y] - intensity) < 3) {
+                                        if (heatmap[i][y] > intensity)
+                                            heatmap[i][y] = intensity;
+                                    } else if (abs(heatmap[i][y] - intensity) >= 7) {
+                                        if (heatmap[i][y] < intensity)
+                                            heatmap[i][y] = intensity;
+                                    } else
+                                        heatmap[i][y] += intensity;
                                 }
                             intensity--;
                         }
@@ -120,8 +138,14 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                                 if (heatmap[i][y] == 0)
                                     heatmap[i][y] = intensity;
                                 else {
-                                    if (heatmap[i][y] > intensity)
-                                        heatmap[i][y] = intensity;
+                                    if (abs(heatmap[i][y] - intensity) < 3) {
+                                        if (heatmap[i][y] > intensity)
+                                            heatmap[i][y] = intensity;
+                                    } else if (abs(heatmap[i][y] - intensity) >= 7) {
+                                        if (heatmap[i][y] < intensity)
+                                            heatmap[i][y] = intensity;
+                                    } else
+                                        heatmap[i][y] += intensity;
                                 }
                             intensity--;
                         }
@@ -135,8 +159,14 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                             if (heatmap[i][j] == 0)
                                 heatmap[i][j] = intensity;
                             else {
-                                if (heatmap[i][j] > intensity)
-                                    heatmap[i][j] = intensity;
+                                if (abs(heatmap[i][j] - intensity) < 3) {
+                                    if (heatmap[i][j] > intensity)
+                                        heatmap[i][j] = intensity;
+                                } else if (abs(heatmap[i][j] - intensity) >= 7) {
+                                    if (heatmap[i][j] < intensity)
+                                        heatmap[i][j] = intensity;
+                                } else
+                                    heatmap[i][j] += intensity;
                             }
                         --intensity;
                         --i;
@@ -150,8 +180,14 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                             if (heatmap[i][j] == 0)
                                 heatmap[i][j] = intensity;
                             else {
-                                if (heatmap[i][j] > intensity)
-                                    heatmap[i][j] = intensity;
+                                if (abs(heatmap[i][j] - intensity) < 3) {
+                                    if (heatmap[i][j] > intensity)
+                                        heatmap[i][j] = intensity;
+                                } else if (abs(heatmap[i][j] - intensity) >= 7) {
+                                    if (heatmap[i][j] < intensity)
+                                        heatmap[i][j] = intensity;
+                                } else
+                                    heatmap[i][j] += intensity;
                             }
                         --intensity;
                         ++i;
@@ -167,8 +203,14 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                             if (heatmap[i][j] == 0)
                                 heatmap[i][j] = intensity;
                             else {
-                                if (heatmap[i][j] > intensity)
-                                    heatmap[i][j] = intensity;
+                                if (abs(heatmap[i][j] - intensity) < 3) {
+                                    if (heatmap[i][j] > intensity)
+                                        heatmap[i][j] = intensity;
+                                } else if (abs(heatmap[i][j] - intensity) >= 7) {
+                                    if (heatmap[i][j] < intensity)
+                                        heatmap[i][j] = intensity;
+                                } else
+                                    heatmap[i][j] += intensity;
                             }
                         --intensity;
                         ++i;
@@ -182,8 +224,14 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                             if (heatmap[i][j] == 0)
                                 heatmap[i][j] = intensity;
                             else {
-                                if (heatmap[i][j] > intensity)
-                                    heatmap[i][j] = intensity;
+                                if (abs(heatmap[i][j] - intensity) < 3) {
+                                    if (heatmap[i][j] > intensity)
+                                        heatmap[i][j] = intensity;
+                                } else if (abs(heatmap[i][j] - intensity) >= 7) {
+                                    if (heatmap[i][j] < intensity)
+                                        heatmap[i][j] = intensity;
+                                } else
+                                    heatmap[i][j] += intensity;
                             }
                         --intensity;
                         --i;
@@ -193,6 +241,7 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
             }
         }
     }
+
     displayMatrix();
 }
 
