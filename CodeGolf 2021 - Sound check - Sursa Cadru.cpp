@@ -32,7 +32,7 @@ struct s {
     unsigned char c;
 };
 
-//ofstream fout("output.out");
+ofstream fout("output.out");
 
 void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
     static vector<vector<int>> soundSources;
@@ -40,7 +40,7 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
         int val;
         int dir;
     };
-    static soundDirection heatmap[500][500];
+    static soundDirection heatmap[250][250];
 
     auto debugSoundSource = [&]() {
         cout << "\n \n";
@@ -82,6 +82,12 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                         if (abs(heatmap[x][y].dir - direction) == 2 || abs(heatmap[x][y].dir - direction) == 6) {
                             heatmap[x][y].val = (heatmap[x][y].val + intensity) / 2;
                             heatmap[x][y].dir = direction;
+                        } else{
+                            if(abs(heatmap[x][y].dir - direction) == 1 || abs(heatmap[x][y].dir - direction) == 7)
+                                if (intensity > heatmap[x][y].val) {
+                                    heatmap[x][y].val = intensity;
+                                    //heatmap[x][y].dir = direction;
+                                }
                         }
                     }
                 }
