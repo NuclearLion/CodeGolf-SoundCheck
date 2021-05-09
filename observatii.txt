@@ -1,0 +1,45 @@
+test 15
+1 peste 2 => 1 dif 1
+2 peste 1 => 1 dif 1
+1 peste 2 => 1 dif 1
+2 peste 1 => 1 dif 1
+
+test 16
+2 peste 2 => 2 dif 0
+3 peste 1 => 1 dif 2
+1 peste 2 => 1 dif 1
+2 peste 1 => 1 dif 1
+
+tes 17 col boxa una langa alta
+8 peste 4 => 12 dif 4
+7 peste 3 => 10 dif 4
+6 peste 2 => 8 dif 4
+5 peste 1 => 6 dif 4
+
+9 peste 3 => 12 dif 6
+8 peste 2 => 10 dif 6
+7 peste 1 => 8 dif 6
+
+test 18 lin
+6 peste 11 => 17 dif 5
+5 peste 10 => 15 dif 5
+4 peste 9 => 13 dif 5
+3 peste 8 => 11 dif 5
+2 peste 7 => 9 dif 5
+1 peste 6 = > 7 dif 5
+
+7 peste 10 => 17 dif 3
+6 peste 9 => 15  dif 3
+5 peste 8 => 13 dif 3
+4 peste 7 => 11 dif 3
+3 peste 6 => 9 dif 3
+2 peste 5 => 7 dif 3
+1 peste 4 => 5 dif 3
+
+test 19
+1 peste 11 => 11 dif 10
+1 pese 8 => 8 dif 7
+
+test 20
+9 peste 1 => 5 dif 8
+1 peste 1 => 1 dif 0

@@ -203,3 +203,22 @@ int main(int argc, char **argv) {
         cout << '\n';
     }
 
+7 10
+4
+3 1 1
+4 5 1
+3 1 9
+5 6 9
+
+
+
+if (abs(heatmap[x][y] - intensity) < 3) {
+            if (heatmap[x][y] > intensity)
+                heatmap[x][y] = intensity;
+        } else if (abs(heatmap[x][y] - intensity) >= 10) {
+            if (heatmap[x][y] < intensity)
+                heatmap[x][y] = intensity;
+        } else /*if (abs(heatmap[x][y] - intensity) < 10 && abs(heatmap[x][y] - intensity) > 6) {
+            heatmap[x][y] = (heatmap[x][y] + intensity) / 2;
+        } else*/
+            heatmap[x][y] += intensity;
