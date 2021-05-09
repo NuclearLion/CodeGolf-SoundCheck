@@ -222,3 +222,24 @@ if (abs(heatmap[x][y] - intensity) < 3) {
             heatmap[x][y] = (heatmap[x][y] + intensity) / 2;
         } else*/
             heatmap[x][y] += intensity;
+
+
+
+
+        if (soundSources[x][y] == 0) {
+            if (heatmap[x][y] == 0)
+                heatmap[x][y] = intensity;
+            else if (addL || addC) {
+                heatmap[x][y] += intensity;
+            } else if (addD) {
+                heatmap[x][y] = (heatmap[x][y] + intensity) / 2;
+            } else if (intensity < heatmap[x][y])
+                heatmap[x][y] = intensity;
+        }
+
+
+
+                /*  8 1 2
+                 *  7   3
+                 *  6 5 4
+                 *
