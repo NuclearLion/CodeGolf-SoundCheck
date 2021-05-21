@@ -42,15 +42,6 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
     };
     static soundDirection heatmap[250][250];
 
-    auto debugSoundSource = [&]() {
-        cout << "\n \n";
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < m; ++j)
-                cout << soundSources[i][j] << " ";
-            cout << '\n';
-        }
-    };
-
     auto stringCreator = [&](int value) {
         string space;
         if (value > 99)
@@ -62,7 +53,7 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
         if (value == 0)
             space = "===";
         return space;
-    };//good
+    };
 
     auto checkCase = [&](int x, int y, int intensity, int direction) {
         if (soundSources[x][y] == 0) {
@@ -86,7 +77,6 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
                             if(abs(heatmap[x][y].dir - direction) == 1 || abs(heatmap[x][y].dir - direction) == 7)
                                 if (intensity > heatmap[x][y].val) {
                                     heatmap[x][y].val = intensity;
-                                    //heatmap[x][y].dir = direction;
                                 }
                         }
                     }
@@ -99,7 +89,6 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
     auto displayMatrix = [&]() {//good
         for (int i = 0; i < n; ++i) {
             for (int j = 0; j < m; ++j)
-                //cout << heatmap[i][j] << " ";
                 cout << stringCreator(heatmap[i][j].val) << " ";
             cout << '\n';
         }
@@ -190,8 +179,6 @@ void f(unsigned char n, unsigned char m, unsigned char ns, s *ss) {
         }
     }
     displayMatrix();
-    //debugSoundSource();
-    //todo luat teste incepand cu 15 si notat observatii
 }
 
 int main(int argc, char **argv) {
@@ -200,7 +187,7 @@ int main(int argc, char **argv) {
         return 0;
     }
     string sInputFile = argv[1];
-    ifstream in("test.txt");
+    ifstream in(sInputFile.c_str(), ios::in);
 
     static int n;
     static int m;
